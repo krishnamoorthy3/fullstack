@@ -13,7 +13,7 @@ const ForgotPassword=lazy(()=>import("./pages/authentication/ForgotPassword"))
 const VerifyOtp=lazy(()=>import("./pages/authentication/VerifyOtp"))
 const CreatePassword=lazy(()=>import("./pages/authentication/CreatePassword"))
 
-
+import {ToastContainer} from "react-toastify"
 
 
 
@@ -27,7 +27,7 @@ const App = () => {
   const {backdrop}=useTheme();
   return (
     <>
-
+    <ToastContainer/>
     <div className="back-drop mask" style={backdrop?{display:"block"}:{display:"none"}}></div>
       <Suspense fallback={<div className="loading">Loading...</div>}>
         <Navbar />

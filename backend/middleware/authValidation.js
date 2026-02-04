@@ -1,12 +1,13 @@
-const User = require('../models/User');
-
+const User = require('../modules/User');
+const VerifiedEmail= require("../modules/VerifiedEmail")
 const registerValidation = async (req, res, next) => {
     try {
-        const { username, email, password } = req.body;
+        const { name, email, password } = req.body;
 
         // Required field validation
-        if (!username || !email || !password) {
+        if (!name || !email || !password) {
             return res.status(400).json({
+                success:false,
                 message: "All fields are required"
             });
         }
@@ -16,6 +17,7 @@ const registerValidation = async (req, res, next) => {
 
         if (!emailRegex.test(email)) {
             return res.status(400).json({
+                success:false,
                 message: "Invalid email format"
             });
         }
@@ -26,6 +28,7 @@ const registerValidation = async (req, res, next) => {
 
         if (!passwordRegex.test(password)) {
             return res.status(400).json({
+                success:false,
                 message:
                     "Password must contain uppercase, lowercase, number, special character and 8+ characters"
             });
@@ -36,10 +39,18 @@ const registerValidation = async (req, res, next) => {
 
         if (existingUser) {
             return res.status(409).json({
+                success:false,
                 message: "User already exists"
             });
         }
 
+        const isVerified=await VerifiedEmail.findOne({email});
+        if(!isVerified) {
+            return res.status(400).json({
+                success:false,
+                message: "Verify the Email before registering"
+            });
+        }
         next();
 
     } catch (err) {
@@ -53,4 +64,4 @@ const registerValidation = async (req, res, next) => {
 
 
 
-export {registerValidation}
+module.exports = { registerValidation };

@@ -4,7 +4,7 @@ const express=require('express');
 const app = express();
 const cors=require('cors');
 const connectDB=require('./database/connectdb'); //database connection 
-
+const {corsOptions} = require('./config/cors');
 
 
 const PORT = process.env.PORT || 3000;
@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 
 // Enable CORS for all routes
-app.use(cors());
+app.use(cors(corsOptions));
 
 
 
@@ -22,6 +22,18 @@ app.get('/', (req, res) => {
     res.end();
 });
 
+// authentication routes
+app.use("/api/v1/auth",require('./routes/authenticationRoutes.js'));
+
+// verify email routes
+app.use("/api/v1/verify",require('./routes/verifyRoutes.js'));
+
+app.use((req,res)=>{
+    res.status(404).json({
+        success:false,
+        message:"Route Not Found"
+    });
+});
 
 
 const startServer=async()=>{

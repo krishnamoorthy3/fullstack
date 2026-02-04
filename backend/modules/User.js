@@ -1,4 +1,4 @@
-const mongoose = require("mongoose")
+const mongoose = require('mongoose');
 
 
 const userSchema = new mongoose.Schema({
@@ -33,16 +33,12 @@ const userSchema = new mongoose.Schema({
             default: Date.now()
         }
     ],
-    otp: {
-        type: String
-    },
-    otpexpire: {
-        type: Date,
-    },
     isActive: {
         type: Boolean,
         default: true,
     }
 })
 
-export const User = new mongoose.model("User", userSchema);
+const User = mongoose.model("User", userSchema);
+
+module.exports = User;
