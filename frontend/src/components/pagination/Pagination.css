@@ -1,0 +1,24 @@
+.pagination-ul{
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    gap: 10px;
+}
+.pagination-ul li button{
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #2525257a;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: white;
+    color: #252525;
+    transition: background-color 0.3s, color 0.3s;
+}
+.pagination-ul li button.pag-active{
+    background-color: #252525;
+    color: white;
+}
+

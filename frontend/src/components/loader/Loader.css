@@ -1,0 +1,26 @@
+.box {
+  display: grid;
+  place-items: center;
+  gap: 14px;
+  min-height: 185px;
+  padding: 25px 10px;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.loader {
+  background-color: transparent;
+  height: 80px;
+  width: 80px;
+  border: 10px solid lightgray;
+  border-top-color: #000;
+  border-radius: 50%;
+  animation: spin 1s infinite;
+}
+
+@keyframes spin {
+  100% {
+    rotate: 360deg;
+  }
+}

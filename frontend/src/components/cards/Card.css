@@ -1,0 +1,25 @@
+.card-text{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    font-size: 14px;
+}
+
+.card{
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.position-absolute{
+    top: 5%;
+    right: 5%;
+    background: whitesmoke;
+    border: 1px solid #ddd;
+    border-radius: 100%;
+    width: 35px;
+    height: 35px;
+}

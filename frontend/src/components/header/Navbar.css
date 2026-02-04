@@ -1,0 +1,63 @@
+.nav-ul{
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-ul .nav-item .nav-link{
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.navbar{
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid #eaeaea;
+}
+.nav-product-count{
+    background-color:rgb(44 44 44);
+    color: white;
+    border-radius: 50%;
+    font-size: 12px;
+    height: 15px;
+    width: 15px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* Search Component Styles */
+.search-div{
+        position: fixed;
+    height: max-content;
+    width: 100%;
+    background: #fff;
+    top: 0;
+    left: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 40px 20px 20px 20px;
+    z-index: 3;
+}
+.search-cls-btn{
+    position: absolute;
+    top: -30px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.btn-search{
+       text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: max-content;
+    padding: 5px 20px;
+    background: #1b1b1b;
+    color: #fff;
+    margin: 0 auto;
+}

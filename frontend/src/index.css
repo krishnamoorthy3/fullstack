@@ -1,0 +1,59 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    color: #252525;
+}
+
+ul{
+    margin: 0;
+    padding: 0;
+}
+
+p{
+    margin: 0;
+    padding: 0;
+}
+
+
+/*  */
+.org-price{
+    color: #393939;
+    text-decoration: line-through;
+}
+
+
+/* Button Start */
+button{
+    background-color: transparent;
+    border: none;
+}
+.btn-primary{
+    background-color: #000000;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+.btn-primary:hover{
+    background-color: #252525;  
+
+}
+.btn-primary:disabled{
+    background-color: #252525;  
+
+}
+
+
+/*  */
+.form-group{
+    margin-bottom: 15px;
+}
+.err-msg{
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
