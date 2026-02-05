@@ -1,6 +1,7 @@
 
 const Otp = require('../modules/otpModel');
-
+const User = require('../modules/User');
+const VerifiedEmail= require("../modules/VerifiedEmail")
 const verifyEmailValidation = async (req, res, next) => {
     try {
         const { email } = req.body;
@@ -19,6 +20,20 @@ const verifyEmailValidation = async (req, res, next) => {
                 message: "Invalid email format"
             });
         }
+         // Duplicate user check
+                const existingUser = await User.findOne({ email });
+        
+                if (existingUser) {
+                    return res.status(409).json({
+                        success:false,
+                        message: "User already exists"
+                    });
+                }
+        
+                const isVerified=await VerifiedEmail.findOne({email});
+                if(isVerified) {
+                    await VerifiedEmail.deleteOne({ email });
+                }
 
         const existingOtp = await Otp.findOne({ email });
         if (existingOtp){

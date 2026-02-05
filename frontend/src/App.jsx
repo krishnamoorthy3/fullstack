@@ -1,21 +1,24 @@
 // Libraries
 import { Routes, Route } from "react-router-dom"
-import { lazy, Suspense } from "react"
+import { lazy, Suspense, useEffect } from "react"
 
+import { useDispatch } from "react-redux";
 import { useTheme } from "./context/Theme.jsx";
 
+import { refreshAccessToken } from "./features/auth/authThunk.js";
 
-const Navbar=lazy(()=>import("./components/header/Navbar"))  
-const Products=lazy(()=>import("./pages/product/Products"))  
-const Authentication=lazy(()=>import("./pages/authentication/Authentication"))  
-const Home=lazy(()=>import("./pages/homepage/Home"))
-const ForgotPassword=lazy(()=>import("./pages/authentication/ForgotPassword"))
-const VerifyOtp=lazy(()=>import("./pages/authentication/VerifyOtp"))
-const CreatePassword=lazy(()=>import("./pages/authentication/CreatePassword"))
+const Navbar = lazy(() => import("./components/header/Navbar"))
+const Products = lazy(() => import("./pages/product/Products"))
+const Authentication = lazy(() => import("./pages/authentication/Authentication"))
+const Home = lazy(() => import("./pages/homepage/Home"))
+const ForgotPassword = lazy(() => import("./pages/authentication/ForgotPassword"))
+const VerifyOtp = lazy(() => import("./pages/authentication/VerifyOtp"))
+const CreatePassword = lazy(() => import("./pages/authentication/CreatePassword"))
+const Profile = lazy(() => import("./pages/authentication/Profile.jsx"))
+import PublicRoute from "./routes/PublicRoute.jsx"
+import { ToastContainer } from "react-toastify"
 
-import {ToastContainer} from "react-toastify"
-
-
+import AuthProtectedRoutes from "./routes/AuthProtectedRoutes.jsx";
 
 // Styles
 import "./App.css"
@@ -23,28 +26,50 @@ import "./App.css"
 
 
 
+
 const App = () => {
-  const {backdrop}=useTheme();
+  const dispatch=useDispatch();
+
+  useEffect(()=>{
+
+    dispatch(refreshAccessToken())
+    
+  },[])
+
+  const { backdrop } = useTheme();
   return (
     <>
-    <ToastContainer/>
-    <div className="back-drop mask" style={backdrop?{display:"block"}:{display:"none"}}></div>
+
+      <ToastContainer />
+      <div className="back-drop mask" style={backdrop ? { display: "block" } : { display: "none" }}></div>
       <Suspense fallback={<div className="loading">Loading...</div>}>
         <Navbar />
       </Suspense>
-        <main className="mt-5">
-          <Suspense fallback={<div className="loading">Loading...</div>}>
+      <main className="mt-5">
+        <Suspense fallback={<div className="loading">Loading...</div>}>
+
           <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/shop" element={<Products />} />
-          <Route path="/auth" element={<Authentication />} />
-          <Route path="/auth/forgot-password" element={<ForgotPassword />} />
-          <Route path="/auth/verify-otp" element={<VerifyOtp />} />
-          <Route path="/auth/create-new-password" element={<CreatePassword />} />
-          <Route path="*" element={<h1>404: Page Not Found</h1>} />
-        </Routes>
+            <Route element={<PublicRoute />}>
+              <Route path="/auth" element={<Authentication />} />
+            </Route>
+
+            <Route element={<AuthProtectedRoutes />}>
+              <Route path="/profile" element={<Profile />} />
+            </Route>
+
+            <Route path="/" element={<Home />} />
+            <Route path="/shop" element={<Products />} />
+
+            <Route path="/auth/forgot-password" element={<ForgotPassword />} />
+            <Route path="/auth/verify-otp" element={<VerifyOtp />} />
+            <Route path="/auth/create-new-password" element={<CreatePassword />} />
+
+            <Route path="*" element={<h1>404: Page Not Found</h1>} />
+          </Routes>
+
         </Suspense>
-        </main>
+      </main>
+
     </>
   )
 }

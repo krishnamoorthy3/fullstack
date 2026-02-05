@@ -1,16 +1,20 @@
 import { lazy,Suspense ,useState} from "react";
 const Login = lazy(() => import("./Login"));
 const Register = lazy(() => import("./Register"));
+
+
 import "./Authentication.css"
 
 
 const Authentication = () => {
+
     const [isLogin, setIsLogin] = useState(true);
     const handleToggle = () => {
         setIsLogin(!isLogin);
     }
     return (
         <>
+
             <section className="auth-wrapper">
                 <div className="container">
                     <div>

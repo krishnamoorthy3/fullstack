@@ -5,10 +5,12 @@ const app = express();
 const cors=require('cors');
 const connectDB=require('./database/connectdb'); //database connection 
 const {corsOptions} = require('./config/cors');
-
+const cookieParser= require('cookie-parser')
 
 const PORT = process.env.PORT || 3000;
 
+
+app.use(cookieParser(process.env.COOKIE_SECRET))
 // Middleware to parse JSON bodies
 app.use(express.json());
 
